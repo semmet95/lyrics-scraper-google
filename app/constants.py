@@ -1,0 +1,7 @@
+#LYRICS_DIV_CLASS_NAME = "SongPageGrid-sc-1vi6xda-0 DGVcp Lyrics__Root-sc-1ynbvzw-0 kkHBOZ"
+#LYRICS_DIV_CLASS_NAME = "Lyrics__Container-sc-1ynbvzw-6 krDVEH"
+LYRICS_DIV_CLASS_NAME = "PZPZlf"
+LYRICS_EXPAND_CLASS_NAME = "MXl0lf mtqGb EhIML vk_arc xpdarr"
+#LYRICS_PROVIDER = "https://genius.com/search"
+LYRICS_PROVIDER = "https://www.google.co.in/search"
+#SEARCH_RESULT_CLASS_NAME = "mini_card"
