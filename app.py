@@ -34,7 +34,7 @@ def get_lyrics_from_url(url):
     print("class name = " + constants.LYRICS_EXPAND_CLASS_NAME)
     #print("page source = \n" + driver.page_source)
 
-    #print(len(driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))))
+    print("size = " + len(driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))))
 
     driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))[0].send_keys(Keys.ENTER)
 
