@@ -29,6 +29,7 @@ def get_lyrics_url(artist, track):
 
 def get_lyrics_from_url(url):
     driver.get(url)
+    time.sleep(3)
     driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))[0].send_keys(Keys.ENTER)
 
     time.sleep(2)
@@ -43,8 +44,9 @@ def setup_selenium():
     global driver, CHROMEDRIVER_PATH, wait
     
     chrome_options = Options()
-    #chrome_options = webdriver.ChromeOptions()
-    chrome_options.headless = True
+    #chrome_options.headless = True
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-gpu')
     
     driver = webdriver.Chrome(CHROMEDRIVER_PATH, chrome_options=chrome_options)
     wait = WebDriverWait(driver, 600)
