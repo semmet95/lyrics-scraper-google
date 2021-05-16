@@ -11,6 +11,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+import config
 import constants
 
 
@@ -34,7 +35,7 @@ def get_lyrics_from_url(url):
     print("class name = " + constants.LYRICS_EXPAND_CLASS_NAME)
     #print("page source = \n" + driver.page_source)
 
-    print("size = " + str(len(driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME)))))
+    #print("size = " + str(len(driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME)))))
 
     driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))[0].send_keys(Keys.ENTER)
 
@@ -79,4 +80,4 @@ def index():
     return lyrics
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=config.PORT, debug=config.DEBUG_MODE)
