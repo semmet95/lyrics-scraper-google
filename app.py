@@ -32,12 +32,11 @@ def get_lyrics_from_url(url):
     driver.get(url)
     time.sleep(3)
     
-    print("class name = " + constants.LYRICS_EXPAND_CLASS_NAME)
-    #print("page source = \n" + driver.page_source)
+    lyrics_expander = driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))
+    if len(lyrics_expander) == 0:
+        lyrics_expander = driver.find_elements_by_xpath("//a[@jsname='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME2))
 
-    #print("size = " + str(len(driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME)))))
-
-    driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_EXPAND_CLASS_NAME))[0].send_keys(Keys.ENTER)
+    lyrics_expander[0].send_keys(Keys.ENTER)
 
     time.sleep(2)
     lyrics_div = driver.find_elements_by_xpath("//div[@class='{}']".format(constants.LYRICS_DIV_CLASS_NAME))[0]
@@ -60,12 +59,16 @@ def setup_selenium():
 
 
 @app.route('/')
+def root_path():
+    return "", 200
+
+@app.route('/lyrics-scraper')
 def index():
     artist = request.args.get('artist', default = None, type = str)
     track = request.args.get('track', default = None, type = str)
 
     if artist is None or track is None:
-        return "invalid artist/track", 400
+        return "please add artist and track parameters to the request", 200
 
     setup_selenium()
 

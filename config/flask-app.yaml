@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lyrics-scraper-google
+  labels:
+    name: lyrics-scraper-google
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: lyrics-scraper-google
+  template:
+    metadata:
+      name: lyrics-scraper-google
+      labels:
+        name: lyrics-scraper-google
+    spec:
+      containers:
+        - name: lyrics-scraper-google
+          image: gcr.io/py-kubernetes-microservices/lyrics-scraper-google:v6
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 3072Mi
+              cpu: 1
+            limits:
+              memory: 5120Mi
+              cpu: 2
+
+      nodeSelector:
+        cloud.google.com/gke-nodepool: flask-pool
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lyrics-scraper
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    name: lyrics-scraper-google
+  type: LoadBalancer
