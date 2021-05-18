@@ -82,7 +82,7 @@ def index():
             return "error retrieving lyrics", 404
 
         return lyrics
-    except e:
+    except:
         driver.quit()
 
 if __name__ == '__main__': 

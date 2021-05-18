@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: lyrics-scraper-google
-          image: gcr.io/py-kubernetes-microservices/lyrics-scraper-google:v7
+          image: gcr.io/py-kubernetes-microservices/lyrics-scraper-google:v8
           ports:
             - containerPort: 8080
           resources:
