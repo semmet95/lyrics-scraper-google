@@ -64,23 +64,26 @@ def root_path():
 
 @app.route('/lyrics-scraper')
 def index():
-    artist = request.args.get('artist', default = None, type = str)
-    track = request.args.get('track', default = None, type = str)
+    try:
+        artist = request.args.get('artist', default = None, type = str)
+        track = request.args.get('track', default = None, type = str)
 
-    if artist is None or track is None:
-        return "please add artist and track parameters to the request", 200
+        if artist is None or track is None:
+            return "please add artist and track parameters to the request", 200
 
-    setup_selenium()
+        setup_selenium()
 
-    lyrics_url = get_lyrics_url(artist, track)
-    lyrics = get_lyrics_from_url(lyrics_url)
+        lyrics_url = get_lyrics_url(artist, track)
+        lyrics = get_lyrics_from_url(lyrics_url)
 
-    driver.quit()
+        driver.quit()
 
-    if lyrics is None:
-        return "error retrieving lyrics", 404
+        if lyrics is None:
+            return "error retrieving lyrics", 404
 
-    return lyrics
+        return lyrics
+    except e:
+        driver.quit()
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     app.run(host="0.0.0.0", port=config.PORT, debug=config.DEBUG_MODE)
